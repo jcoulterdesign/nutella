@@ -1,0 +1,31 @@
+.is-inactive {
+  background-color: rgb(213, 213, 213);
+  pointer-events: none;
+}
+
+button#continue {
+  transition: all 0.3s ease;
+}
+
+button.inactive {
+  background-color: rgb(213, 213, 213);
+  pointer-events: none;
+}
+
+.is-error {
+  background-color: rgba(255, 0, 0, 0.109);
+  animation: shake 0.25s ease-in-out;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-6px);
+  }
+  75% {
+    transform: translateX(6px);
+  }
+}

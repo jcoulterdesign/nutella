@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/styles/app.css" />
+    <title>World Nutella® Day</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" />
+  </head>
+  <body class="text-white bg-white">
+    <!-- Background -->
+    <div class="js-background w-full h-full fixed top-0 left-0 -z-10">
+      <div class="background"></div>
+    </div>
+    <!-- Overlay -->
+    <div id="modal-overlay" class="fixed inset-0 bg-black/60 hidden z-40 js-modals"></div>
+
+    <!-- Terms Modal -->
+    <div id="terms-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 max-w-150 m-auto">
+      <div class="bg-white text-black max-w-lg w-full rounded-xl p-8 relative text-center shadow-sm rounded-sm">
+        <button class="absolute top-3 right-3 text-xl js-close-modal opacity-50 hover:opacity-100 transition-opacity cursor-pointer">&times;</button>
+
+        <h2 class="text-lg font-bold mb-4 text-red">Terms & Conditions</h2>
+        <hr class="border-0 h-0.5 max-w-100 m-auto mb-5 mt-6 w-full bg-red" />
+        <div class="text-sm max-h-[60vh] overflow-y-auto font-museo">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <p>
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim
+            ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Privacy Modal -->
+    <div id="privacy-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 max-w-150 m-auto">
+      <div class="bg-white text-black max-w-lg w-full rounded-xl p-8 relative text-center shadow-sm rounded-sm">
+        <button class="absolute top-3 right-3 text-xl js-close-modal opacity-50 hover:opacity-100 transition-opacity cursor-pointer">&times;</button>
+
+        <h2 class="text-lg font-bold mb-4 text-red">Privacy Policy</h2>
+        <hr class="border-0 h-0.5 max-w-100 m-auto mb-5 mt-6 w-full bg-red" />
+        <div class="text-sm max-h-[60vh] overflow-y-auto font-museo">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <p>
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim
+            ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-col justify-between min-h-screen">
+      <!-- Header -->
+      <header class="py-4 bg-white header fixed w-full z-20">
+        <a href="/" class="block w-max m-auto"><img src="src/images/brand/logo.png" alt="Nutella Logo" class="mx-auto w-20 md:w-28 transition-all duration-200" /></a>
+      </header>
+      <!-- Sections -->
+      <div>
+        <!-- Age Gate -->
+        <section class="intro js-intro_form hidden opacity-0" data-step="1">
+          <div class="container flex items-center justify-center md:h-[calc(100vh-6rem)] h-[calc(100vh-7rem)] pt-32 md:pt-40">
+            <div class="intro_age text-center xs:px-24 px-20 py-12 pb-24 relative flex flex-col items-center justify-between gap-8">
+              <div>
+                <h2 class="text-black text-base xs:text-md uppercase sm:mt-8 mb-4">Please confirm your age before entering</h2>
+                <h3 class="text-red text-md xs:text-lg md:text-xl uppercase">What year were you born?</h3>
+              </div>
+              <input type="text" id="birth-year" name="birth-year" placeholder="YYYY" class="md:mt-0 -mt-4 sm:text-[80px] outline-none cursor-pointer p-2 text-black text-center text-xl border-b-red border-b-4 w-full placeholder:text-[#c8c8c8]" maxlength="4" required />
+              <div class="text-center">
+                <input type="button" id="age-submit" value="Continue" class="xs:text-[34px] block m-auto mb-4 w-max xs:px-16 xs:py-6 px-8 py-3 bg-red text-white text-md rounded-full cursor-pointer hover:scale-106 active:scale-98 transition-all duration-200" />
+                <p class="text-black w-full leading-4.5 hidden sm:block">To view this site you must be over 16 years old, or have the permission of a caregiver.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Recipe selection -->
+        <section class="js-recipes" data-step="2">
+          <div class="pt-32 md:pt-40 md:px-12 px-2">
+            <div class="container text-center text-black bg-[#fbf8f6] rounded-lg mb-12 shadow-sm">
+              <div class="p-4 md:p-8 md:py-24 py-12">
+                <nav class="m-auto w-max mb-8 flex items-center gap-2">
+                  <div class="w-8 h-3 rounded-full bg-red"></div>
+                  <div class="w-3 h-3 rounded-full bg-[#7d7d7d]"></div>
+                  <div class="w-3 h-3 rounded-full bg-[#7d7d7d]"></div>
+                </nav>
+                <!-- Header -->
+                <header class="max-w-220 m-auto w-full">
+                  <h2 class="text-md md:text-lg text-red mb-4 font-bold">World Nutella® Day is almost here! Celebrate with us by trying our Nutella® recipes and be in with a chance to win 1 of 5 Nutella® Electronic Dispensers.</h2>
+                  <hr class="border-0 h-0.5 max-w-100 m-auto mb-5 mt-6 w-full bg-red" />
+                  <h2 class="uppercase text-[24px] md:text-[28px] md:leading-7 leading-6">Choose 3 Nutella® recipes to enter the competition</h2>
+                  <h3 class="text-[20px] font-museo md:leading-7 leading-6 md:mt-0 mt-2">Drag 3 recipes here or click on recipe cards to select.</h3>
+                </header>
+
+                <div class="mt-8 flex items-start gap-8">
+                  <!-- Recipes Grid -->
+                  <div id="recipes" class="w-full lg:w-3/4 grid grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="rounded-[14px] relative bg-[#f5f0ec]">
+                      <div class="shadow-sm recipe-card rounded-[14px] bg-white overflow-hidden cursor-grab z-10 relative h-full" draggable="false" data-recipe-id="1">
+                        <div style="background-image: url('src/images/recipes/layered-cream-pastry.png')" class="h-[30vw] md:h-45 bg-cover bg-center"></div>
+                        <h4 class="uppercase py-4 px-2 md:px-4 text-[14px] leading-4 md:leading-7 md:text-[16px]">Layered cream pastry</h4>
+                      </div>
+                      <div class="absolute top-1/2 left-0 right-0 m-auto text-lg transform -translate-y-1/2 opacity-10">
+                        <img class="h-16 mb-2 m-auto" src="src/images/icons/jar_icon.svg" draggable="false" />
+                        Yum!
+                      </div>
+                    </div>
+                    <div class="rounded-[14px] relative bg-[#f5f0ec]">
+                      <div class="shadow-sm recipe-card rounded-[14px] bg-white overflow-hidden cursor-grab z-10 relative h-full" draggable="false" data-recipe-id="2">
+                        <div style="background-image: url('src/images/recipes/new-york-roll.png')" class="h-[30vw] md:h-45 bg-cover bg-center"></div>
+                        <h4 class="uppercase py-4 px-2 md:px-4 text-[14px] leading-4 md:leading-7 md:text-[16px]">New York roll</h4>
+                      </div>
+                      <div class="absolute top-1/2 left-0 right-0 m-auto text-lg transform -translate-y-1/2 opacity-10">
+                        <img class="h-16 mb-2 m-auto" src="src/images/icons/jar_icon.svg" draggable="false" />
+                        Yum!
+                      </div>
+                    </div>
+                    <div class="rounded-[14px] relative bg-[#f5f0ec]">
+                      <div class="shadow-sm recipe-card rounded-[14px] bg-white overflow-hidden cursor-grab z-10 relative h-full" draggable="false" data-recipe-id="3">
+                        <div style="background-image: url('src/images/recipes/mini-dutch-pancakes.png')" class="h-[30vw] md:h-45 bg-cover bg-center"></div>
+                        <h4 class="uppercase py-4 px-2 md:px-4 text-[14px] leading-4 md:leading-7 md:text-[16px]">Mini Dutch pancakes</h4>
+                      </div>
+                      <div class="absolute top-1/2 left-0 right-0 m-auto text-lg transform -translate-y-1/2 opacity-10">
+                        <img class="h-16 mb-2 m-auto" src="src/images/icons/jar_icon.svg" draggable="false" />
+                        Yum!
+                      </div>
+                    </div>
+                    <div class="rounded-[14px] relative bg-[#f5f0ec]">
+                      <div class="shadow-sm recipe-card rounded-[14px] bg-white overflow-hidden cursor-grab z-10 relative h-full" draggable="false" data-recipe-id="4">
+                        <div style="background-image: url('src/images/recipes/tapioca.png')" class="h-[30vw] md:h-45 bg-cover bg-center"></div>
+                        <h4 class="uppercase py-4 px-2 md:px-4 text-[14px] leading-4 md:leading-7 md:text-[16px]">Tapioca</h4>
+                      </div>
+                      <div class="absolute top-1/2 left-0 right-0 m-auto text-lg transform -translate-y-1/2 opacity-10">
+                        <img class="h-16 mb-2 m-auto" src="src/images/icons/jar_icon.svg" draggable="false" />
+                        Yum!
+                      </div>
+                    </div>
+                    <div class="rounded-[14px] relative bg-[#f5f0ec]">
+                      <div class="shadow-sm recipe-card rounded-[14px] bg-white overflow-hidden cursor-grab z-10 relative h-full" draggable="false" data-recipe-id="5">
+                        <div style="background-image: url('src/images/recipes/carrot-cake.png')" class="h-[30vw] md:h-45 bg-cover bg-center"></div>
+                        <h4 class="uppercase py-4 px-2 md:px-4 text-[14px] leading-4 md:leading-7 md:text-[16px]">Carrot cake</h4>
+                      </div>
+                      <div class="absolute top-1/2 left-0 right-0 m-auto text-lg transform -translate-y-1/2 opacity-10">
+                        <img class="h-16 mb-2 m-auto" src="src/images/icons/jar_icon.svg" draggable="false" />
+                        Yum!
+                      </div>
+                    </div>
+                    <div class="rounded-[14px] relative bg-[#f5f0ec]">
+                      <div class="shadow-sm recipe-card rounded-[14px] bg-white overflow-hidden cursor-grab z-10 relative h-full" draggable="false" data-recipe-id="6">
+                        <div style="background-image: url('src/images/recipes/chimney-cakes.png')" class="h-[30vw] md:h-45 bg-cover bg-center"></div>
+                        <h4 class="uppercase py-4 px-2 md:px-4 text-[14px] leading-4 md:leading-7 md:text-[16px]">Chimney cakes</h4>
+                      </div>
+                      <div class="absolute top-1/2 left-0 right-0 m-auto text-lg transform -translate-y-1/2 opacity-10">
+                        <img class="h-16 mb-2 m-auto" src="src/images/icons/jar_icon.svg" draggable="false" />
+                        Yum!
+                      </div>
+                    </div>
+                    <div class="rounded-[14px] relative bg-[#f5f0ec]">
+                      <div class="shadow-sm recipe-card rounded-[14px] bg-white overflow-hidden cursor-grab z-10 relative h-full" draggable="false" data-recipe-id="7">
+                        <div style="background-image: url('src/images/recipes/mont-blanc.png')" class="h-[30vw] md:h-45 bg-cover bg-center"></div>
+                        <h4 class="uppercase py-4 px-2 md:px-4 text-[14px] leading-4 md:leading-7 md:text-[16px]">Mont Blanc</h4>
+                      </div>
+                      <div class="absolute top-1/2 left-0 right-0 m-auto text-lg transform -translate-y-1/2 opacity-10">
+                        <img class="h-16 mb-2 m-auto" src="src/images/icons/jar_icon.svg" draggable="false" />
+                        Yum!
+                      </div>
+                    </div>
+                    <div class="rounded-[14px] relative bg-[#f5f0ec]">
+                      <div class="shadow-sm recipe-card rounded-[14px] bg-white overflow-hidden cursor-grab z-10 relative h-full" draggable="false" data-recipe-id="8">
+                        <div style="background-image: url('src/images/recipes/panna-cotta.png')" class="h-[30vw] md:h-45 bg-cover bg-center"></div>
+                        <h4 class="uppercase py-4 px-2 md:px-4 text-[14px] leading-4 md:leading-7 md:text-[16px]">Panna Cotta</h4>
+                      </div>
+                      <div class="absolute top-1/2 left-0 right-0 m-auto text-lg transform -translate-y-1/2 opacity-10">
+                        <img class="h-16 mb-2 m-auto" src="src/images/icons/jar_icon.svg" draggable="false" />
+                        Yum!
+                      </div>
+                    </div>
+                    <div class="rounded-[14px] relative bg-[#f5f0ec]">
+                      <div class="shadow-sm recipe-card rounded-[14px] bg-white overflow-hidden cursor-grab z-10 relative h-full" draggable="false" data-recipe-id="9">
+                        <div style="background-image: url('src/images/recipes/pear-tiramasu.png')" class="h-[30vw] md:h-45 bg-cover bg-center"></div>
+                        <h4 class="uppercase py-4 px-2 md:px-4 text-[14px] leading-4 md:leading-7 md:text-[16px]">Pear Tiramasu</h4>
+                      </div>
+                      <div class="absolute top-1/2 left-0 right-0 m-auto text-lg transform -translate-y-1/2 opacity-10">
+                        <img class="h-16 mb-2 m-auto" src="src/images/icons/jar_icon.svg" draggable="false" />
+                        Yum!
+                      </div>
+                    </div>
+                    <div class="rounded-[14px] relative bg-[#f5f0ec]">
+                      <div class="shadow-sm recipe-card rounded-[14px] bg-white overflow-hidden cursor-grab z-10 relative h-full" draggable="false" data-recipe-id="10">
+                        <div style="background-image: url('src/images/recipes/iced-coffee.png')" class="h-[30vw] md:h-45 bg-cover bg-center"></div>
+                        <h4 class="uppercase py-4 px-2 md:px-4 text-[14px] leading-4 md:leading-7 md:text-[16px]">Iced Coffee</h4>
+                      </div>
+                      <div class="absolute top-1/2 left-0 right-0 m-auto text-lg transform -translate-y-1/2 opacity-10">
+                        <img class="h-16 mb-2 m-auto" src="src/images/icons/jar_icon.svg" draggable="false" />
+                        Yum!
+                      </div>
+                    </div>
+                    <div class="rounded-[14px] relative bg-[#f5f0ec]">
+                      <div class="shadow-sm recipe-card rounded-[14px] bg-white overflow-hidden cursor-grab z-10 relative h-full" draggable="false" data-recipe-id="11">
+                        <div style="background-image: url('src/images/recipes/italian-cream-bun.png')" class="h-[30vw] md:h-45 bg-cover bg-center"></div>
+                        <h4 class="uppercase py-4 px-2 md:px-4 text-[14px] leading-4 md:leading-7 md:text-[16px]">Italian cream bun</h4>
+                      </div>
+                      <div class="absolute top-1/2 left-0 right-0 m-auto text-lg transform -translate-y-1/2 opacity-10">
+                        <img class="h-16 mb-2 m-auto" src="src/images/icons/jar_icon.svg" draggable="false" />
+                        Yum!
+                      </div>
+                    </div>
+                    <div class="rounded-[14px] relative bg-[#f5f0ec]">
+                      <div class="shadow-sm recipe-card rounded-[14px] bg-white overflow-hidden cursor-grab z-10 relative h-full" draggable="false" data-recipe-id="12">
+                        <div style="background-image: url('src/images/recipes/overnight-oats.png')" class="h-[30vw] md:h-45 bg-cover bg-center"></div>
+                        <h4 class="uppercase py-4 px-2 md:px-4 text-[14px] leading-4 md:leading-7 md:text-[16px]">Overnight oats</h4>
+                      </div>
+                      <div class="absolute top-1/2 left-0 right-0 m-auto text-lg transform -translate-y-1/2 opacity-10">
+                        <img class="h-16 mb-2 m-auto" src="src/images/icons/jar_icon.svg" draggable="false" />
+                        Yum!
+                      </div>
+                    </div>
+                    <div class="rounded-[14px] relative bg-[#f5f0ec]">
+                      <div class="shadow-sm recipe-card rounded-[14px] bg-white overflow-hidden cursor-grab z-10 relative h-full" draggable="false" data-recipe-id="13">
+                        <div style="background-image: url('src/images/recipes/pizza.png')" class="h-[30vw] md:h-45 bg-cover bg-center"></div>
+                        <h4 class="uppercase py-4 px-2 md:px-4 text-[14px] leading-4 md:leading-7 md:text-[16px]">Pizza</h4>
+                      </div>
+                      <div class="absolute top-1/2 left-0 right-0 m-auto text-lg transform -translate-y-1/2 opacity-10">
+                        <img class="h-16 mb-2 m-auto" src="src/images/icons/jar_icon.svg" draggable="false" />
+                        Yum!
+                      </div>
+                    </div>
+                    <div class="rounded-[14px] relative bg-[#f5f0ec]">
+                      <div class="shadow-sm recipe-card rounded-[14px] bg-white overflow-hidden cursor-grab z-10 relative h-full" draggable="false" data-recipe-id="14">
+                        <div style="background-image: url('src/images/recipes/crepe-rolls.png')" class="h-[30vw] md:h-45 bg-cover bg-center"></div>
+                        <h4 class="uppercase py-4 px-2 md:px-4 text-[14px] leading-4 md:leading-7 md:text-[16px]">Crepe rolls</h4>
+                      </div>
+                      <div class="absolute top-1/2 left-0 right-0 m-auto text-lg transform -translate-y-1/2 opacity-10">
+                        <img class="h-16 mb-2 m-auto" src="src/images/icons/jar_icon.svg" draggable="false" />
+                        Yum!
+                      </div>
+                    </div>
+                    <div class="rounded-[14px] relative bg-[#f5f0ec]">
+                      <div class="shadow-sm recipe-card rounded-[14px] bg-white overflow-hidden cursor-grab z-10 relative h-full" draggable="false" data-recipe-id="15">
+                        <div style="background-image: url('src/images/recipes/shortbread.png')" class="h-[30vw] md:h-45 bg-cover bg-center"></div>
+                        <h4 class="uppercase py-4 px-2 md:px-4 text-[14px] leading-4 md:leading-7 md:text-[16px]">Shortbread</h4>
+                      </div>
+                      <div class="absolute top-1/2 left-0 right-0 m-auto text-lg transform -translate-y-1/2 opacity-10">
+                        <img class="h-16 mb-2 m-auto" src="src/images/icons/jar_icon.svg" draggable="false" />
+                        Yum!
+                      </div>
+                    </div>
+                    <div class="rounded-[14px] relative bg-[#f5f0ec]">
+                      <div class="shadow-sm recipe-card rounded-[14px] bg-white overflow-hidden cursor-grab z-10 relative h-full" draggable="false" data-recipe-id="16">
+                        <div style="background-image: url('src/images/recipes/hazelnut-slice.png')" class="h-[30vw] md:h-45 bg-cover bg-center"></div>
+                        <h4 class="uppercase py-4 px-2 md:px-4 text-[14px] leading-4 md:leading-7 md:text-[16px]">Hazelnut slice</h4>
+                      </div>
+                      <div class="absolute top-1/2 left-0 right-0 m-auto text-lg transform -translate-y-1/2 opacity-10">
+                        <img class="h-16 mb-2 m-auto" src="src/images/icons/jar_icon.svg" draggable="false" />
+                        Yum!
+                      </div>
+                    </div>
+                    <div class="rounded-[14px] relative bg-[#f5f0ec]">
+                      <div class="shadow-sm recipe-card rounded-[14px] bg-white overflow-hidden cursor-grab z-10 relative h-full" draggable="false" data-recipe-id="17">
+                        <div style="background-image: url('src/images/recipes/sweet-spanish-brioche.png')" class="h-[30vw] md:h-45 bg-cover bg-center"></div>
+                        <h4 class="uppercase py-4 px-2 md:px-4 text-[14px] leading-4 md:leading-7 md:text-[16px]">Sweet Spanish brioche</h4>
+                      </div>
+                      <div class="absolute top-1/2 left-0 right-0 m-auto text-lg transform -translate-y-1/2 opacity-10">
+                        <img class="h-16 mb-2 m-auto" src="src/images/icons/jar_icon.svg" draggable="false" />
+                        Yum!
+                      </div>
+                    </div>
+                    <div class="rounded-[14px] relative bg-[#f5f0ec]">
+                      <div class="shadow-sm recipe-card rounded-[14px] bg-white overflow-hidden cursor-grab z-10 relative h-full" draggable="false" data-recipe-id="18">
+                        <div style="background-image: url('src/images/recipes/french-style-doughnuts.png')" class="h-[30vw] md:h-45 bg-cover bg-center"></div>
+                        <h4 class="uppercase py-4 px-2 md:px-4 text-[14px] leading-4 md:leading-7 md:text-[16px]">French style doughnuts</h4>
+                      </div>
+                      <div class="absolute top-1/2 left-0 right-0 m-auto text-lg transform -translate-y-1/2 opacity-10">
+                        <img class="h-16 mb-2 m-auto" src="src/images/icons/jar_icon.svg" draggable="false" />
+                        Yum!
+                      </div>
+                    </div>
+                    <div class="rounded-[14px] relative bg-[#f5f0ec]">
+                      <div class="shadow-sm recipe-card rounded-[14px] bg-white overflow-hidden cursor-grab z-10 relative h-full" draggable="false" data-recipe-id="19">
+                        <div style="background-image: url('src/images/recipes/cheesecake.png')" class="h-[30vw] md:h-45 bg-cover bg-center"></div>
+                        <h4 class="uppercase py-4 px-2 md:px-4 text-[14px] leading-4 md:leading-7 md:text-[16px]">Cheesecake</h4>
+                      </div>
+                      <div class="absolute top-1/2 left-0 right-0 m-auto text-lg transform -translate-y-1/2 opacity-10">
+                        <img class="h-16 mb-2 m-auto" src="src/images/icons/jar_icon.svg" draggable="false" />
+                        Yum!
+                      </div>
+                    </div>
+                    <div class="rounded-[14px] relative bg-[#f5f0ec]">
+                      <div class="shadow-sm recipe-card rounded-[14px] bg-white overflow-hidden cursor-grab z-10 relative h-full" draggable="false" data-recipe-id="20">
+                        <div style="background-image: url('src/images/recipes/ice-cream.png')" class="h-[30vw] md:h-45 bg-cover bg-center"></div>
+                        <h4 class="uppercase py-4 px-2 md:px-4 text-[14px] leading-4 md:leading-7 md:text-[16px]">Ice cream</h4>
+                      </div>
+                      <div class="absolute top-1/2 left-0 right-0 m-auto text-lg transform -translate-y-1/2 opacity-10">
+                        <img class="h-16 mb-2 m-auto" src="src/images/icons/jar_icon.svg" draggable="false" />
+                        Yum!
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Selected Recipes -->
+                  <div id="selected-recipes" class="w-1/2 lg:w-1/4 bottom-0 p-4 top-36 min-h-37.5 hidden sm:sticky flex md:flex-col gap-4 bg-white rounded-[22px]">
+                    <img src="src/images/icons/arrow.png" alt="Nutella Jar Icon" class="h-12 m-auto mb-2 absolute -top-10 right-40" draggable="false" />
+                    <div class="recipe-card rounded-[14px] overflow-hidden cursor-grab shadow-sm" draggable="false" data-recipe-id="1">
+                      <div class="h-[30vw] md:h-45 bg-cover bg-center bg-[#d6d6d6] text-white flex items-center justify-center text-[80px] text-center">1</div>
+                      <h4 class="uppercase p-4">&nbsp;</h4>
+                    </div>
+                    <div class="recipe-card rounded-[14px] overflow-hidden cursor-grab shadow-sm" draggable="false" data-recipe-id="2">
+                      <div class="h-[30vw] md:h-45 bg-cover bg-center bg-[#d6d6d6] text-white flex items-center justify-center text-[80px] text-center">2</div>
+                      <h4 class="uppercase p-4">&nbsp;</h4>
+                    </div>
+                    <div class="recipe-card rounded-[14px] overflow-hidden cursor-grab shadow-sm" draggable="false" data-recipe-id="3">
+                      <div class="h-[30vw] md:h-45 bg-cover bg-center bg-[#d6d6d6] text-white flex items-center justify-center text-[80px] text-center">3</div>
+                      <h4 class="uppercase p-4">&nbsp;</h4>
+                    </div>
+                    <button id="continue" class="mt-2 px-4 py-3 bg-red text-white rounded cursor-pointer hover:scale-106 active:scale-98 transition-all duration-200">Continue</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Submission -->
+        <section class="js-submissions hidden opacity-0" data-step="3">
+          <div class="pt-32 md:pt-40 md:px-12 px-2">
+            <div class="container text-center text-black bg-[#fbf8f6] rounded-lg mb-12 shadow-sm">
+              <div class="md:p-8 p-4 py-12">
+                <nav class="m-auto w-max mb-12 flex items-center gap-2">
+                  <div class="w-8 h-3 rounded-full bg-red"></div>
+                  <div class="w-3 h-3 rounded-full bg-[#7d7d7d]"></div>
+                  <div class="w-3 h-3 rounded-full bg-[#7d7d7d]"></div>
+                </nav>
+                <header class="max-w-220 m-auto w-full text-left flex items-center relative">
+                  <h1 class="text-lg text-red mb-4 font-bold uppercase w-2/3">Enter competition for a chance to win 1 of 5 Nutella® electronic dispensers</h1>
+                  <img class="w-56 absolute right-0 z-0 -top-50" src="../../src/images/objects/dispenser.png" />
+                </header>
+                <div>
+                  <h3 class="font-museo">Your selected recipes</h3>
+                  <div id="final-selected-recipes" class="mt-8 flex items-start gap-8 md:flex-nowrap flex-wrap md:justify-evenly max-w-220 m-auto">
+                    <div class="rounded-[14px] relative bg-[#f5f0ec] w-full">
+                      <div class="shadow-sm rounded-[14px] bg-white overflow-hidden z-10 relative" draggable="false">
+                        <div style="background-image: url('src/images/recipes/cheesecake.png')" class="h-[30vw] md:h-45 bg-cover bg-center"></div>
+                        <h4 class="uppercase p-4">Cheesecake</h4>
+                      </div>
+                    </div>
+                    <div class="rounded-[14px] relative bg-[#f5f0ec] w-full">
+                      <div class="shadow-sm rounded-[14px] bg-white overflow-hidden z-10 relative" draggable="false">
+                        <div style="background-image: url('src/images/recipes/cheesecake.png')" class="h-[30vw] md:h-45 bg-cover bg-center"></div>
+                        <h4 class="uppercase p-4">Cheesecake</h4>
+                      </div>
+                    </div>
+                    <div class="rounded-[14px] relative bg-[#f5f0ec] w-full">
+                      <div class="shadow-sm rounded-[14px] bg-white overflow-hidden z-10 relative" draggable="false">
+                        <div style="background-image: url('src/images/recipes/cheesecake.png')" class="h-[30vw] md:h-45 bg-cover bg-center"></div>
+                        <h4 class="uppercase p-4">Cheesecake</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <form method="post" action="/" class="js-form_validation max-w-220 m-auto mt-12 text-left" enctype="multipart/form-data">
+                  <div>
+                    <!-- Selected Recipes -->
+                    <input type="hidden" id="selected-recipe-1" name="selected-recipe-1" />
+                    <input type="hidden" id="selected-recipe-2" name="selected-recipe-2" />
+                    <input type="hidden" id="selected-recipe-3" name="selected-recipe-3" />
+
+                    <!-- Business Name -->
+                    <label for="business-name" class="block mb-2">Business Name*</label>
+                    <input type="text" id="business-name" name="business-name" class="w-full p-2 mb-4 text-black outline-none" required />
+
+                    <!-- Business Address -->
+                    <label for="business-address" class="block mb-2">Business Address*</label>
+                    <textarea id="business-address" name="business-address" rows="4" class="w-full p-2 mb-4 text-black outline-none" required></textarea>
+
+                    <!-- Contact Name -->
+                    <label for="contact-name" class="block mb-2">Contact Name*</label>
+                    <input type="text" id="contact-name" name="contact-name" class="w-full p-2 mb-4 text-black outline-none" required />
+
+                    <!-- Email Address -->
+                    <label for="email" class="block mb-2">Email Address*</label>
+                    <input type="email" id="email" name="email" class="w-full p-2 mb-4 text-black outline-none" required />
+
+                    <!-- Phone Number -->
+                    <label for="phone" class="block mb-2">Phone Number*</label>
+                    <input type="tel" id="phone" name="phone" class="w-full p-2 mb-4 text-black outline-none" required />
+
+                    <!-- Wholesaler Account Number (optional) -->
+                    <label for="wholesaler-account" class="block mb-2"> Wholesaler Account Number (e.g. Booker) (optional)</label>
+                    <input type="text" id="wholesaler-account" name="wholesaler-account" class="w-full p-2 mb-4 text-black outline-none" />
+
+                    <!-- Upload proof -->
+                    <label class="block mb-2"> Upload proof of outlet (photo of menu or branded POS)* </label>
+
+                    <div id="dropzone" class="relative flex flex-col items-center justify-center w-full mb-6 py-12 border-2 rounded-sm bg-[#fbf8f6] border-dashed border-red rounded-xl text-center cursor-pointer transition">
+                      <!-- Icon -->
+                      <svg id="Layer_2" class="w-12 mb-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33.97 34.52">
+                        <defs>
+                          <style>
+                            .cls-1 {
+                              fill-rule: evenodd;
+                            }
+                          </style>
+                        </defs>
+                        <g id="Layer_1-2">
+                          <polygon class="cls-1" fill="#e20019" points="0 34.52 0 31.12 0 23.82 3.4 23.82 3.4 31.12 30.57 31.12 30.57 23.82 33.97 23.82 33.97 31.12 33.97 34.52 30.57 34.52 3.4 34.52 0 34.52 0 34.52" />
+                          <polygon class="cls-1" fill="#e20019" points="2.42 11.38 16.98 25.94 31.55 11.38 22.06 11.38 22.06 0 11.91 0 11.91 11.38 2.42 11.38 2.42 11.38" />
+                        </g>
+                      </svg>
+                      <p class="text-sm mb-1 pointer-events-none text-[#111111] font-museo">Drag and drop your file here</p>
+                      <p class="text-sm mb-3 pointer-events-none font-museo">or</p>
+                      <span class="mt-2 px-8 py-3 bg-red font-normal text-white rounded cursor-pointer hover:scale-106 active:scale-98 transition-all duration-200"> Browse files </span>
+
+                      <!-- Real input -->
+                      <input type="file" id="proof" name="proof" accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer" required />
+                    </div>
+
+                    <p id="file-name" class="text-sm text-red hidden"></p>
+
+                    <!-- Terms -->
+                    <label for="terms" class="flex items-center mb-4 border-2 p-4 border-red rounded-sm">
+                      <input type="checkbox" id="terms" name="terms" class="mr-2 mt-1" required />
+                      <span>
+                        I agree to the
+                        <a href="/" class="text-red js-terms-modal">Terms and Conditions</a> *
+                      </span>
+                    </label>
+
+                    <!-- reCAPTCHA placeholder -->
+                    <div class="mb-6 p-4 border border-white/30 text-left text-sm opacity-70">I’m not a robot (reCAPTCHA placeholder)</div>
+                  </div>
+
+                  <input type="submit" value="Submit Entry" class="w-full mt-8 px-8 py-3 bg-red text-white rounded cursor-pointer hover:scale-101 active:scale-99 transition-all duration-200" />
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <!-- Footer -->
+      <footer class="py-5 bg-red text-white">
+        <div class="container flex md:justify-between justify-center items-center flex-wrap">
+          <a href="/"><img src="src/images/brand/logo_footer.png" alt="Nutella Logo" class="w-28 md:w-32 md:m-0 m-auto transition-all duration-200" /></a>
+          <div class="flex justify-center items-center gap-4 md:w-auto w-full mt-4 md:mt-0">
+            <a href="/" class="sm:text-[16px] text-[14px] block sm:px-8 sm:py-3 rounded-full sm:border-3 border-white sm:hover:bg-white sm:hover:text-red transition-colors duration-200 text-center sm:w-auto w-auto js-terms-modal">Terms and Conditions</a>
+            <span class="sm:hidden">|</span>
+            <a href="/" class="sm:text-[16px] text-[14px] block sm:px-8 sm:py-3 rounded-full sm:border-3 border-white sm:hover:bg-white sm:hover:text-red transition-colors duration-200 text-center sm:w-auto w-auto js-privacy-modal">Privacy Policy</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script type="module" src="/src/js/app.js"></script>
+  </body>
+</html>

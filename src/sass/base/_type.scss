@@ -1,0 +1,16 @@
+h1 {
+  font-size: 2rem;
+}
+
+form {
+  label {
+    font-family: "Museo Sans Regular";
+  }
+  input:not([type="submit"]),
+  textarea {
+    background-color: #f3f3f5;
+    border: 2px solid #b4b7b9;
+    border-radius: 12px;
+    padding: 0.5rem;
+  }
+}

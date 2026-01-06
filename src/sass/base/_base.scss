@@ -1,0 +1,84 @@
+@font-face {
+  font-family: "Nutella";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Nutella"), url("../../fonts/nutella.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Museo Sans Regular";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Museo Sans Regular"), url("../../fonts/museo-sans-regular.woff") format("woff");
+}
+
+.container {
+  @apply mx-auto max-w-screen-2xl md:px-8 px-4;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Nutella";
+  font-weight: normal;
+  user-select: none;
+}
+
+.font-museo {
+  font-family: "Museo Sans Regular", sans-serif;
+}
+
+body .background {
+  @apply fixed -top-1/2 -left-1/2 w-[200%] h-[200%] bg-center -z-10;
+  transform: rotate(-10deg);
+  background-image: url("../../images/bg/bg.png");
+}
+
+.header {
+  box-shadow: 0 5px 4px rgb(0 0 0 / 0.1);
+}
+
+.intro_age {
+  @apply bg-cover bg-no-repeat bg-center;
+  width: 580px;
+  height: 700px;
+  min-width: 340px;
+  min-height: 412px;
+  background-image: url("../../images/bg/nutella_jar.png");
+
+  @media screen and (max-width: 600px) {
+    width: 100%;
+    height: 114vw;
+  }
+}
+
+.recipe-card {
+  cursor: grab;
+}
+
+.recipe-card.used {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+#selected-recipes .recipe-card.is-hovered {
+  outline: 3px solid #dc2626;
+  outline-offset: 3px;
+}
+
+.remove-btn {
+  @apply absolute top-2 right-2 w-8 h-8 bg-red text-white rounded-full flex items-center justify-center cursor-pointer hover:scale-110 transition-transform duration-200;
+}
+
+section {
+  transition: opacity 0.4s ease;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
