@@ -78,6 +78,10 @@ section {
   pointer-events: none;
 }
 
+.mobile-hidden {
+  @apply hidden md:flex;
+}
+
 .is-visible {
   opacity: 1;
   pointer-events: auto;

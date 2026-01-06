@@ -6,8 +6,9 @@
     <link rel="stylesheet" href="/src/styles/app.css" />
     <title>World Nutella® Day</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" />
   </head>
   <body class="text-white bg-white">
@@ -299,7 +300,7 @@
                     </div>
                   </div>
                   <!-- Selected Recipes -->
-                  <div id="selected-recipes" class="w-1/2 lg:w-1/4 bottom-0 p-4 top-36 min-h-37.5 hidden sm:sticky flex md:flex-col gap-4 bg-white rounded-[22px]">
+                  <div id="selected-recipes" class="w-1/2 lg:w-1/4 bottom-0 p-4 top-36 min-h-37.5 mobile-hidden sm:sticky sm:flex md:flex-col gap-4 bg-white rounded-[22px]">
                     <img src="src/images/icons/arrow.png" alt="Nutella Jar Icon" class="h-12 m-auto mb-2 absolute -top-10 right-40" draggable="false" />
                     <div class="recipe-card rounded-[14px] overflow-hidden cursor-grab shadow-sm" draggable="false" data-recipe-id="1">
                       <div class="h-[30vw] md:h-45 bg-cover bg-center bg-[#d6d6d6] text-white flex items-center justify-center text-[80px] text-center">1</div>
