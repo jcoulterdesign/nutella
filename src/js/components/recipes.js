@@ -10,7 +10,6 @@ $(function () {
       // Find all continue buttons linked to this container
       // Here we assume the button is inside the same step wrapper
       const $buttons = $(".continue-btn");
-      console.log($buttons);
       $buttons.toggleClass("inactive", selectedCount !== 3);
     });
   }
@@ -56,18 +55,17 @@ $(function () {
       }
 
       // ------------------ CONFETTI (desktop only) ------------------
-      if ($(window).width() > 768) {
-        const rect = $slot.find("div")[0].getBoundingClientRect();
-        confetti({
-          particleCount: 30,
-          startVelocity: 25,
-          spread: 60,
-          origin: {
-            x: (rect.left + rect.width / 2) / window.innerWidth,
-            y: (rect.top + rect.height / 2) / window.innerHeight,
-          },
-        });
-      }
+
+      const rect = $slot.find("div")[0].getBoundingClientRect();
+      confetti({
+        particleCount: 30,
+        startVelocity: 25,
+        spread: 60,
+        origin: {
+          x: (rect.left + rect.width / 2) / window.innerWidth,
+          y: (rect.top + rect.height / 2) / window.innerHeight,
+        },
+      });
     });
 
     $recipe.addClass("used").css({ "pointer-events": "none", opacity: 0.5 });
