@@ -6,7 +6,6 @@ const modules = import.meta.glob("./components/**/*.js");
 
 // Component config array
 const components = [
-  { selector: ".js-background", path: "./components/background.js" },
   { selector: ".js-intro_form", path: "./components/ageCheck.js" },
   { selector: "#recipes", path: "./components/recipes.js" },
   { selector: ".js-modals", path: "./components/modals.js" },

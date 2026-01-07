@@ -14,5 +14,5 @@ export function goToStep(fromStep, toStep) {
     window.scrollTo(0, 0); // scroll to top
     to.style.display = "";
     to.classList.add("is-visible");
-  }, 400); // must match CSS transition
+  }, 400);
 }
